@@ -20,17 +20,17 @@ html {
 }
 .testimonialsCenter {
   color: #fff !important;
-  margin-bottom: 70px;
-  margin-top: 70px;
+  margin-bottom: 40px;
+  margin-top: 40px;
   justify-content: center;
   align-items: center;
   text-align: center;
-  max-width: 65%;
+  max-width: 90%;
   background: #000;
   background: -webkit-linear-gradient(to top, #000, #434343);
   background: linear-gradient(to top, #000, #434343);
   border-radius: 50px;
-  padding: 70px;
+  padding: 20px;
   box-shadow: 37px 25px 49px 8px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 37px 25px 49px 8px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 37px 25px 49px 8px rgba(0, 0, 0, 0.75);
