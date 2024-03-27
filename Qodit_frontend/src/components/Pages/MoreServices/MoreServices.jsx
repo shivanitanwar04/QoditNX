@@ -40,7 +40,7 @@ export const MoreServices = (props) => {
           <div className="row">
             <div className="col-md-6">
               <div className="web-content">
-                <div className="">
+                <div className="web-content-h2">
                   <h2>Web Development</h2>
                 </div>
                 <p>
