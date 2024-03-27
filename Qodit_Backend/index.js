@@ -24,14 +24,15 @@ app.post('/send-email', async (req, res) => {
             auth: {
                 user: process.env.EMAIL_USER, 
                 pass: 'zyie szct epye gpuo'
-            }
+            },
+            pool: true 
         });
 
         let mailOptions = {
     from: `${name} <${email}>`,
     to: 'amityadav497421@gmail.com', 
     subject: 'Contact Us Form Submission',
-    text: `\n\nDear ${name},has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are details of applicants:\n\nName: ${name}\nEmail: ${email}\nMessage:${message}\n`,
+    text: `\n\nDear ${name},has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are the details of applicants:\n\nName: ${name}\nEmail: ${email}\nMessage:${message}\n`,
        };
        try {
             let info = await transporter.sendMail(mailOptions);
@@ -58,14 +59,15 @@ app.post('/send-email-with-attachments', async (req, res) => {
             auth: {
                 user: process.env.EMAIL_USER, 
                 pass: 'zyie szct epye gpuo'
-            }
+            },
+            pool : true
         });
 
         let mailOptions = {
             from: `${name} <${email}>`,
             to: 'amityadav497421@gmail.com', 
             subject: 'Career Form  Submission',
-            text: `\n\nDear ${name},has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are details of applicants:\n\n ${name}\nMessage:${message}\n\nEmail: ${email}\nMobile Number: ${phoneNumber}\nJob Role: ${jobrole}\nTechnology: ${technology}`,
+            text: `\n\nDear ${name},has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are the details of applicants:\n\nName:${name}\nMessage:${message}\nEmail: ${email}\nMobile Number: ${phoneNumber}\nJob Role: ${jobrole}\nTechnology: ${technology}`,
             attachments: attachment ? [{ filename: attachment.originalname, content: attachment.buffer }] : []
         };
 
