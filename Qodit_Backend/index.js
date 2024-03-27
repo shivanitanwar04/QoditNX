@@ -28,11 +28,12 @@ app.post('/send-email', async (req, res) => {
         });
 
         let mailOptions = {
-            from: process.env.EMAIL_USER, 
-            to: 'amityadav497421@gmail.com', 
-            subject: 'New Contact Form Submission',
-            text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-                  };
+    from: `${name} <${email}>`,
+    to: 'amityadav497421@gmail.com', 
+    subject: 'Contact Us Form Submission',
+    text: `\n\nDear ${name},\n\nThank you for your interest in joining our team. We have received your career form submission with the following details:\nName: ${name}\nEmail: ${email}\nMessage:${message}\nOur team will review your information and contact you soon. If you have any further questions or updates regarding your application, please feel free to reach out to us.\n\nBest regards,\n[Your Company Name] Team\n`,
+};
+
 
         try {
             let info = await transporter.sendMail(mailOptions);
@@ -48,7 +49,7 @@ app.post('/send-email', async (req, res) => {
     }
 });
 app.post('/send-email-with-attachments', async (req, res) => {
-    const { name,message, email,phoneNumber,technology  } = req.body;
+    const { name, message, email, phoneNumber, jobrole, technology } = req.body;
     const attachment = req.file; 
 
     try {
@@ -63,10 +64,10 @@ app.post('/send-email-with-attachments', async (req, res) => {
         });
 
         let mailOptions = {
-            from: process.env.EMAIL_USER, 
+            from: `${name} <${email}>`,
             to: 'amityadav497421@gmail.com', 
-            subject: 'New Contact Form Submission',
-            text: `Name: ${name}\nMessage: ${message}\nEmail: ${email}\nPhone Number:${phoneNumber}\nTechnology:${technology}\n`,
+            subject: 'Career Form  Submission',
+            text: `\n\nDear ${name},\n\nThank you for your interest in joining our team. We have received your career form submission with the following details:\nName: ${name}\nMessage:${message}\n\nEmail: ${email}\nMobile Number: ${phoneNumber}\nJob Role: ${jobrole}\nTechnology: ${technology}\nOur team will review your information and contact you soon. If you have any further questions or updates regarding your application, please feel free to reach out to us.\n\nBest regards,\n[Your Company Name] Team\n`,
             attachments: attachment ? [{ filename: attachment.originalname, content: attachment.buffer }] : []
         };
 
@@ -83,6 +84,7 @@ app.post('/send-email-with-attachments', async (req, res) => {
         res.status(500).send('Error creating transporter');
     }
 });
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

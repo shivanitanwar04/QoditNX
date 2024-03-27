@@ -1,39 +1,138 @@
-import React, { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Swal from 'sweetalert2';
 
 export const ContactUs = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "name" && !/^[a-zA-Z\s]*$/.test(value)) {
+      toast.error("Name should only contain letters and spaces");
+      return;
+    }
+    setFormData({ ...formData, [name]: value });
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-    const message = e.target.message.value;
-
-    if (!name || !email || !message) {
-      toast.error("Please fill in all the required fields.");
-      return;
-    }
-
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-    if (!emailRegex.test(email)) {
-      toast.error("Invalid email address.");
-      return;
-    }
-
-    toast.success("Message Sent Successfully");
-    e.target.reset();
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const { name, email, message } = formData;
+
+  if (!name.trim()) {
+    toast.error("Please Fill the Name.");
+    return;
+  }
+
+  if (!email.trim()) {
+    toast.error("Please Fill the Email.");
+    return;
+  }
+
+  if (!validateEmail(email)) {
+    toast.error("Please enter a valid email address.");
+    return;
+  }
+
+  if (!message.trim()) {
+    toast.error("Please Fill the Message.");
+    return;
+  }
+
+  const loadingToast = toast.info("Sending Response ...");
+
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/send-email",
+      formData
+    );
+    console.log(response.data);
+    toast.update(loadingToast, {
+      render: "Your Response Saved Successfully",
+      type: toast.TYPE.SUCCESS,
+      autoClose: 3000, 
+    });
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    toast.error("Error sending message. Please try again later.");
+  }
+};
+
+  const handleConfirmation = (e) => {
+    e.preventDefault();
+
+    const { name, email, message } = formData;
+if (!name.trim()) {
+      toast.error("Please Fill the Name.");
+      return;
+    }
+
+    if (!email.trim()) {
+      toast.error("Please Fill the Email.");
+      return;
+    }
+    if (!validateEmail(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    if (!message.trim()) {
+      toast.error("Please Fill the Message.");
+      return;
+    }
+
+    const blurContainer = document.createElement("div");
+    blurContainer.style.position = "fixed";
+    blurContainer.style.top = "0";
+    blurContainer.style.left = "0";
+    blurContainer.style.width = "100%";
+    blurContainer.style.height = "100%";
+    blurContainer.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    blurContainer.style.filter = "blur(26px)";
+    blurContainer.style.zIndex = "1000";
+    document.body.appendChild(blurContainer);
+
+    Swal.fire({
+      title: "Are you sure you want to submit the Contact form?",
+      text: "You won't be able to revert this!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Submit it!"
+    }).then((result) => {
+      document.body.removeChild(blurContainer);
+
+      if (result.isConfirmed) {
+        handleSubmit(e);
+      }
+    });
+  };
   return (
     <div>
       <Helmet>
-        <link rel="canonical" href=" https://qodit.io/contact_us" />
+        <link rel="canonical" href="https://qodit.io/contact_us" />
       </Helmet>
       <div className="background-svg">
         <img
@@ -46,7 +145,7 @@ export const ContactUs = () => {
 
       <div
         className="service-bg cover-background"
-        style={{ zIndex: 1, position: " relative", paddingTop: "5rem" }}
+        style={{ zIndex: 1, position: "relative", paddingTop: "5rem" }}
       >
         <div className="container h-100">
           <div className="row h-100 align-items-center">
@@ -109,7 +208,7 @@ export const ContactUs = () => {
               <img src="./img/Contact_us.png" width="100%" alt="" />
             </div>
             <div className="col-md-7 form-contact">
-              <form name="sentMessage" validate onSubmit={handleSubmit}>
+              <form name="sentMessage" onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="name">Name</label>
                   <input
@@ -118,8 +217,8 @@ export const ContactUs = () => {
                     name="name"
                     className="form-control"
                     placeholder="Name"
-                    required
-                    // onChange={handleChange}
+                    value={formData.name}
+                    onChange={handleChange}
                   />
                   <p className="help-block text-danger"></p>
                 </div>
@@ -131,11 +230,11 @@ export const ContactUs = () => {
                     name="email"
                     className="form-control"
                     placeholder="Email"
-                    // onChange={handleChange}
+                    value={formData.email}
+                    onChange={handleChange}
                   />
                   <p className="help-block text-danger"></p>
                 </div>
-
                 <div className="form-group">
                   <label htmlFor="msg">Message</label>
                   <textarea
@@ -144,12 +243,13 @@ export const ContactUs = () => {
                     className="form-control contactFormStyle"
                     rows="4"
                     placeholder="Message"
-                    // onChange={handleChange}
+                    value={formData.message}
+                    onChange={handleChange}
                   ></textarea>
                   <p className="help-block text-danger"></p>
                 </div>
                 <div id="success"></div>
-                <button type="submit" className="btn btn-custom btn-lg">
+                <button type="submit" className="btn btn-custom btn-lg" onClick={handleConfirmation}  >
                   Send Message
                 </button>
                 <ToastContainer />
@@ -160,4 +260,4 @@ export const ContactUs = () => {
       </div>
     </div>
   );
-};
+}
