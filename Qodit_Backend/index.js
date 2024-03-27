@@ -31,11 +31,9 @@ app.post('/send-email', async (req, res) => {
     from: `${name} <${email}>`,
     to: 'amityadav497421@gmail.com', 
     subject: 'Contact Us Form Submission',
-    text: `\n\nDear ${name},\n\nThank you for your interest in joining our team. We have received your career form submission with the following details:\nName: ${name}\nEmail: ${email}\nMessage:${message}\nOur team will review your information and contact you soon. If you have any further questions or updates regarding your application, please feel free to reach out to us.\n\nBest regards,\n[Your Company Name] Team\n`,
-};
-
-
-        try {
+    text: `\n\nDear ${name},has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are details of applicants:\n\nName: ${name}\nEmail: ${email}\nMessage:${message}\n`,
+       };
+       try {
             let info = await transporter.sendMail(mailOptions);
             console.log('Email sent:', info.response);
             res.send('Email sent successfully!');
@@ -67,7 +65,7 @@ app.post('/send-email-with-attachments', async (req, res) => {
             from: `${name} <${email}>`,
             to: 'amityadav497421@gmail.com', 
             subject: 'Career Form  Submission',
-            text: `\n\nDear ${name},\n\nThank you for your interest in joining our team. We have received your career form submission with the following details:\nName: ${name}\nMessage:${message}\n\nEmail: ${email}\nMobile Number: ${phoneNumber}\nJob Role: ${jobrole}\nTechnology: ${technology}\nOur team will review your information and contact you soon. If you have any further questions or updates regarding your application, please feel free to reach out to us.\n\nBest regards,\n[Your Company Name] Team\n`,
+            text: `\n\nDear ${name},has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are details of applicants:\n\n ${name}\nMessage:${message}\n\nEmail: ${email}\nMobile Number: ${phoneNumber}\nJob Role: ${jobrole}\nTechnology: ${technology}`,
             attachments: attachment ? [{ filename: attachment.originalname, content: attachment.buffer }] : []
         };
 
