@@ -20,6 +20,9 @@ export const CareerForm = (props) => {
     fileSize: 0, 
   });
 
+ const handleCountryChange = (country) => {
+    setFormData({ ...formData, phoneNumber: "" }); 
+  };
    const handleChange = (e) => {
      const { name, value, files } = e.target;
      if (name === "name" && !/^[a-zA-Z\s]*$/.test(value)) {
@@ -269,24 +272,26 @@ export const CareerForm = (props) => {
                   />
                   <p className="help-block text-danger"></p>
                 </div>
-             <div className="form-group">
-           <label htmlFor="phoneNumber" style={{ marginBottom: '10px' }}>Mobile Number</label>
-         <div style={{ paddingTop: '25px' }} className="phone-input-container">
-         <PhoneInput
-         inputProps={{
-         id: "phoneNumber",
-         name: "phoneNumber",
-         required: true,
-         autoFocus: true,
-         className: "form-control" 
-       }}
-      country={"in"}
-       value={formData.phoneNumber}
-      onChange={(value) => setFormData({ ...formData, phoneNumber: value })}
-    />
-  </div>
-  <p className="help-block text-danger"></p>
-</div>
+            <div className="form-group">
+        <label htmlFor="phoneNumber" style={{ marginBottom: '10px' }}>Mobile Number</label>
+        <div style={{ paddingTop: '25px' }} className="phone-input-container">
+          <PhoneInput
+            inputProps={{
+              id: "phoneNumber",
+              name: "phoneNumber",
+              required: true,
+              autoFocus: true,
+              className: "form-control"
+            }}
+            country={"in"} 
+            value={formData.phoneNumber}
+            onChange={(value) => setFormData({ ...formData, phoneNumber: value })}
+            countryCodeEditable={false}
+            onCountryChange={handleCountryChange} 
+          />
+        </div>
+        <p className="help-block text-danger"></p>
+      </div>
 
 
                <div className="form-group">
