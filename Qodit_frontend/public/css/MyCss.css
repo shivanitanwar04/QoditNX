@@ -310,7 +310,7 @@ hr {
   border-radius: 0;
   margin: 9px 20px 0 20px;
 
-  font-family: "auto";
+  font-family: "Lato", sans-serif;
 }
 #bs-example-navbar-collapse-1 .active {
   border-bottom: 2px solid #919191;
@@ -2338,7 +2338,9 @@ footer .social-icon li i:hover {
 .contactlink {
   color: black;
   font-weight: bold;
-  font-family: "Auto";
+  /* font-family: "Auto"; */
+  font-family: "Lato", sans-serif;
+
   font-size: 16px;
 }
 

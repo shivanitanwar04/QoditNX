@@ -1,5 +1,15 @@
-import { Link, withRouter } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 export const Navigation = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    // Navigate to the contactus page
+    navigate("/contactus");
+  };
+
   return (
     <nav id="menu" className="navbar navbar-default navbar-fixed-top">
       <div className="container-fluid">
@@ -15,12 +25,14 @@ export const Navigation = () => {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          {/* <Link className="navbar-brand page-scroll" to="/">
-            Qodit
-          </Link> */}
-          <a href="/">
-            <img className="navbar-brand page-scroll" src="img/logo1.png"></img>
-          </a>
+
+          <Link to="/">
+            <img
+              className="navbar-brand page-scroll"
+              src="img/logo1.png"
+              alt="logo"
+            ></img>
+          </Link>
         </div>
 
         <div
@@ -29,53 +41,42 @@ export const Navigation = () => {
         >
           <ul className="nav navbar-nav navbar-right">
             <li className="nav-item">
-              <a
-                exact
-                activeClassName="active"
-                href="/about"
+              <Link
+                to="/about"
                 className="page-scroll hover-underline-animation"
               >
                 About Us
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
-                exact
-                activeClassName="active"
-                href="/services"
-                className="page-scroll  hover-underline-animation"
+              <Link
+                to="/services"
+                className="page-scroll hover-underline-animation"
               >
                 Services
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item">
-              <a
-                exact
-                activeClassName="active"
-                href="/features"
+              <Link
+                to="/features"
                 className="page-scroll hover-underline-animation"
               >
                 Feature
-              </a>
+              </Link>
             </li>
 
             <li>
-              <a
-                exact
-                activeClassName="active"
-                href="/career"
+              <Link
+                to="/career"
                 style={{ textDecoration: "none" }}
                 className="page-scroll hover-underline-animation"
               >
                 Career
-              </a>
+              </Link>
             </li>
-            <button className="contactusbtn">
-              <a className="contactlink" href="/contactus">
-                {" "}
-                CONTACT US
-              </a>
+            <button className="contactusbtn" onClick={handleClick}>
+              CONTACT US
             </button>
           </ul>
         </div>
@@ -83,4 +84,3 @@ export const Navigation = () => {
     </nav>
   );
 };
- 
