@@ -1066,11 +1066,11 @@ label {
 #new-about .img-responsive {
   width: 70%;
   height: 50%;
-  margin-top: 10rem;
+  margin-top: 3rem;
   margin-bottom: 5rem;
 }
 #new-about .feature-details {
-  margin-top: 16rem;
+  margin-top: 9rem;
   margin-left: -10rem;
 }
 #new-about .feature-details > h1 {
@@ -1120,6 +1120,7 @@ label {
 #new-about .who-img {
   overflow-x: hidden;
   height: 300px;
+  padding-left: 15px;
 }
 #new-about .who-we p {
   text-align: justify;
@@ -1237,15 +1238,18 @@ label {
 #service .web-service {
   color: #fff;
   padding: 12px 0;
+  padding-left: 15px;
 }
 #service .web-service p {
   color: #fff;
   text-align: justify;
   padding: 20px 0;
   line-height: 30px;
+  padding-left: 15px;
 }
 #service .web-service h2 {
   color: #fff;
+  padding-left: 15px;
 }
 #policy .terms3 {
   font-size: inherit;
