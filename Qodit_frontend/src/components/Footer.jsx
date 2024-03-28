@@ -525,7 +525,7 @@ const FooterPage = (props) => {
       </footer>
       <p class="footer-company-name text-center">
         ©2021 Qodit Pvt. Ltd . All Rights Reserved.
-      </p>iiiii
+      </p>
     </div>
   );
 };

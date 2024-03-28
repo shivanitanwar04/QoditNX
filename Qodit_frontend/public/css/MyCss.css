@@ -1226,6 +1226,7 @@ label {
   height: 400px;
   float: right;
   padding: 25px 0;
+  padding-top: 4rem;
 }
 #service .service-image img {
   max-width: 100%;
@@ -2178,9 +2179,9 @@ footer .social-icon li i:hover {
   .careersec {
     padding: 80px 0 0 0 !important;
   }
-  /* .web-content-h2 h2{
-margin-top: 50rem;#new-about
-} */
+  #service .web-content-h2 h2{
+margin-top: 2rem;
+} 
   .alicesec .alice-carousel__next-btn-item span {
     font-size: 40px !important;
   }
