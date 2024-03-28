@@ -62,7 +62,7 @@ export const Navigation = () => {
                 to="/features"
                 className="page-scroll hover-underline-animation"
               >
-                Feature
+                Features
               </Link>
             </li>
 
