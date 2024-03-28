@@ -120,7 +120,12 @@ if (!name.trim()) {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Submit it!"
+      confirmButtonText: "Yes, Submit it!",
+      willOpen: () => {
+    const popup = Swal.getPopup();
+    popup.style.width = '400px'; 
+    popup.style.height = '300px';
+  }
     }).then((result) => {
       document.body.removeChild(blurContainer);
 
