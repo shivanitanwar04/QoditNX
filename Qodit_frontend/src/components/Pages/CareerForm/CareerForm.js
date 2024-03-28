@@ -175,30 +175,37 @@ export const CareerForm = (props) => {
     return;
   }
 
-     const blurContainer = document.createElement("div");
-    blurContainer.style.position = "fixed";
-    blurContainer.style.top = "0";
-    blurContainer.style.left = "0";
-    blurContainer.style.width = "100%";
-    blurContainer.style.height = "100%";
-    blurContainer.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; 
-    blurContainer.style.filter = "blur(26px)";
-    blurContainer.style.zIndex = "1000"; 
-    document.body.appendChild(blurContainer);
-    Swal.fire({
-      title: "Are you want to Submit the Career Form ?",
-      text: "You won't be able to revert this!",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Submit it!"
-    }).then((result) => {
-      document.body.removeChild(blurContainer);
-      if (result.isConfirmed) {
-        handleSubmit(e);
-      }
-    });
+   const blurContainer = document.createElement("div");
+blurContainer.style.position = "fixed";
+blurContainer.style.top = "0";
+blurContainer.style.left = "0";
+blurContainer.style.width = "100%";
+blurContainer.style.height = "100%";
+blurContainer.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+blurContainer.style.filter = "blur(26px)";
+blurContainer.style.zIndex = "1000";
+document.body.appendChild(blurContainer);
+
+Swal.fire({
+  title: "Are you want to Submit the Career Form ?",
+  text: "You won't be able to revert this!",
+  icon: "question",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, Submit it!",
+  willOpen: () => {
+    const popup = Swal.getPopup();
+    popup.style.width = '400px'; 
+    popup.style.height = '300px';
+  }
+}).then((result) => {
+  document.body.removeChild(blurContainer);
+  if (result.isConfirmed) {
+    handleSubmit(e);
+  }
+});
+
   };
   return (
     <div>

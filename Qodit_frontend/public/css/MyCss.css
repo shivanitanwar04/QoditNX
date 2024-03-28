@@ -1721,6 +1721,11 @@ label {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+@media (max-width: 1024px) {
+#service .sec-service {
+  padding-top: 120px !important;}
+}
+
 
 @media (max-width: 1024px) {
   .sec-about {
