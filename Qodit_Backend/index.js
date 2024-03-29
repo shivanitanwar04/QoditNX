@@ -43,7 +43,7 @@ app.post('/send-email', async (req, res) => {
                 from: 'Qodit <amityadav497421@gmail.com>',
                 to: email,
                 subject: 'Thank You for Applying',
-                text: `Thank you for your application, ${name} We have received your message and will get back to you soon.`,
+                text: `\n\nDear ${name},\n\nThank you for applying. We have received your message and will get back to you soon.\n\nHere are your application details:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}\n`,
             };
             await transporter.sendMail(feedbackOptions);
 
@@ -89,7 +89,7 @@ app.post('/send-email-with-attachments', async (req, res) => {
                 from: 'Qodit <amityadav497421@gmail.com>',
                 to: email,
                 subject: 'Thank You for Applying',
-                text: `Thank you for your application, ${name} We have received your message and will get back to you soon.`,
+                text: `\n\nDear ${name},\n\nThank you for applying. We have received your message and will get back to you soon.\n\nHere are your application details:\n\nName: ${name}\nMessage: ${message}\nEmail: ${email}\nMobile Number: ${phoneNumber}\nJob Role: ${jobrole}\nTechnology: ${technology}\n`,
             };
             await transporter.sendMail(feedbackOptions);
         } catch (error) {
