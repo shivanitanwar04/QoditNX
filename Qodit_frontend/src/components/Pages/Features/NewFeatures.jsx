@@ -18,7 +18,7 @@ export const NewFeature = (props) => {
 
    </Helmet>
         <div className="background-svg">
-         <img className="background-header" src="./img/FEATURE_1.jpeg" width="100%" alt="" />
+         <img className="background-header" src="./img/Features.png" width="100%" alt="" />
         </div>
 
       <div
@@ -28,7 +28,7 @@ export const NewFeature = (props) => {
         <div className="container h-100">
           <div className="row h-100 align-items-center">
             <div className="col-12 text-center" data-aos="zoom-in">
-              <h1 className="fw-light">Features</h1>
+              {/* <h1 className="fw-light">Features</h1> */}
             </div>
           </div>
         </div>

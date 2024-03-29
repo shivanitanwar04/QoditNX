@@ -15,7 +15,7 @@ export const MoreServices = (props) => {
       <div className="background-svg">
         <img
           className="background-header"
-          src="img/Service-2.jpeg"
+          src="img/Services.png"
           width="100%"
           alt=""
         />
@@ -28,7 +28,7 @@ export const MoreServices = (props) => {
         <div className="container h-100">
           <div className="row h-100 align-items-center">
             <div className="col-12 text-center">
-              <h1 className="fw-light">Our Services</h1>
+              {/* <h1 className="fw-light">Our Services</h1> */}
             </div>
           </div>
         </div>

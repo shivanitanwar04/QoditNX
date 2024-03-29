@@ -142,7 +142,7 @@ if (!name.trim()) {
       <div className="background-svg">
         <img
           className="background-header"
-          src="./img/CONTACTUS-1.jpeg"
+          src="./img/contectus.png"
           width="100%"
           alt=""
         />

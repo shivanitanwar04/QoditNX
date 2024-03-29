@@ -24,7 +24,7 @@ export const NewAboutUs = () => {
         <div className="background-svg">
           <img
             className="background-header"
-            src="./img/Abiutus-1.jpeg"
+            src="./img/Aboutus.png"
             width="100%"
             alt=""
           />
@@ -37,7 +37,7 @@ export const NewAboutUs = () => {
           <div className="container h-100">
             <div className="row h-100 align-items-center">
               <div className="col-12 text-center" data-aos="zoom-in">
-                <h1 className="fw-light">About us</h1>
+                {/* <h1 className="fw-light">About us</h1> */}
               </div>
             </div>
           </div>

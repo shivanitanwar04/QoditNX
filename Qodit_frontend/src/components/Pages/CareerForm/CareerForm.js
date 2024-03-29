@@ -212,7 +212,7 @@ Swal.fire({
       <div className="background-svg">
         <img
           className="background-header"
-          src="./img/CAREER-1.jpeg"
+          src="./img/Career.png"
           width="100%"
           alt=""
         />
@@ -224,7 +224,7 @@ Swal.fire({
         <div className="container h-100">
           <div className="row h-100 align-items-center">
             <div className="col-12 text-center" data-aos="zoom-in">
-              <h1 className="fw-light">career</h1>
+              {/* <h1 className="fw-light">career</h1> */}
             </div>
           </div>
         </div>
