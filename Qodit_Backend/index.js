@@ -14,30 +14,40 @@ app.use(cors());
 app.use(upload.single('attachment')); 
 
 app.post('/send-email', async (req, res) => {
-    const { name,email,message } = req.body; 
+    const { name, email, message } = req.body;
 
     try {
         let transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 465,
-            secure: true, 
+            secure: true,
             auth: {
-                user: process.env.EMAIL_USER, 
-                pass: 'zyie szct epye gpuo'
+                user: process.env.EMAIL_USER,
+                pass: 'gklz ugpn gfvw tpid'
             },
-            pool: true 
+            pool: true
         });
 
         let mailOptions = {
-    from: `${name} <${email}>`,
-    to: 'amityadav497421@gmail.com', 
-    subject: 'Contact Us Form Submission',
-    text: `\n\nDear ${name},has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are the details of applicants:\n\nName: ${name}\nEmail: ${email}\nMessage:${message}\n`,
-       };
-       try {
+            from: `${email}`,
+            to: 'amityadav497421@gmail.com',
+            subject: 'Contact Us Form Submission',
+            text: `\n\nDear ${name}, has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are the details of applicants:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}\n`,
+        };
+
+        try {
             let info = await transporter.sendMail(mailOptions);
             console.log('Email sent:', info.response);
-            res.send('Email sent successfully!');
+             res.send('Email sent successfully!');
+            let feedbackOptions = {
+                from: 'Qodit <amityadav497421@gmail.com>',
+                to: email,
+                subject: 'Thank You for Applying',
+                text: `Thank you for your application, ${name} We have received your message and will get back to you soon.`,
+            };
+            await transporter.sendMail(feedbackOptions);
+
+           
         } catch (error) {
             console.error('Error sending email:', error);
             res.status(500).send('Error sending email');
@@ -57,14 +67,14 @@ app.post('/send-email-with-attachments', async (req, res) => {
             port: 465,
             secure: true, 
             auth: {
-                user: process.env.EMAIL_USER, 
-                pass: 'zyie szct epye gpuo'
+                user: process.env.EMAIL_USER,
+                pass: 'gklz ugpn gfvw tpid'
             },
             pool : true
         });
 
         let mailOptions = {
-            from: `${name} <${email}>`,
+            from: `${email}`,
             to: 'amityadav497421@gmail.com', 
             subject: 'Career Form  Submission',
             text: `\n\nDear ${name},has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are the details of applicants:\n\nName:${name}\nMessage:${message}\nEmail: ${email}\nMobile Number: ${phoneNumber}\nJob Role: ${jobrole}\nTechnology: ${technology}\n`,
@@ -74,7 +84,14 @@ app.post('/send-email-with-attachments', async (req, res) => {
         try {
             let info = await transporter.sendMail(mailOptions);
             console.log('Email sent:', info.response);
-            res.send('Email sent successfully!');
+             res.send('Email sent successfully!');
+            let feedbackOptions = {
+                from: 'Qodit <amityadav497421@gmail.com>',
+                to: email,
+                subject: 'Thank You for Applying',
+                text: `Thank you for your application, ${name} We have received your message and will get back to you soon.`,
+            };
+            await transporter.sendMail(feedbackOptions);
         } catch (error) {
             console.error('Error sending email:', error);
             res.status(500).send('Error sending email');
