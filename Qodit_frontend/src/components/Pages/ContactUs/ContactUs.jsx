@@ -155,7 +155,7 @@ if (!name.trim()) {
         <div className="container h-100">
           <div className="row h-100 align-items-center">
             <div className="col-12 text-center">
-              <h1 className="fw-light">Contact Us</h1>
+              {/* <h1 className="fw-light">Contact Us</h1> */}
             </div>
           </div>
         </div>
@@ -257,7 +257,7 @@ if (!name.trim()) {
                 <button type="submit" className="btn btn-custom btn-lg" onClick={handleConfirmation}  >
                   Send Message
                 </button>
-                <ToastContainer />
+                <ToastContainer/>
               </form>
             </div>
           </div>
