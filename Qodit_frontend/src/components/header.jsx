@@ -56,7 +56,36 @@ const items = [
   </div>,
   <div className="intro">
     <div className="background-svg">
-      <img className="overlay" src="./img/banner-2.jpeg" width="100%" alt="" />
+      <video
+        className="overlay video-player"
+        autoPlay
+        muted
+        onEnded={(e) => {
+          e.target.play();
+        }}
+        ref={(videoRef) => {
+          if (videoRef) {
+            const resizeVideo = () => {
+              const { innerWidth } = window;
+              const aspectRatio = 16 / 9; 
+              let videoWidth = innerWidth;
+
+              videoRef.style.width = `${videoWidth}px`;
+              videoRef.style.height = `${videoWidth / aspectRatio}px`;
+            };
+
+            resizeVideo();
+            window.addEventListener('resize', resizeVideo);
+
+            return () => {
+              window.removeEventListener('resize', resizeVideo);
+            };
+          }
+        }}
+      >
+        <source src="./img/Home_Screen_Video_1.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </div>
 
     <div className="overlay">
@@ -79,7 +108,36 @@ const items = [
   </div>,
   <div className="intro">
     <div className="background-svg">
-      <img className="overlay" src="./img/banner-3.jpeg" width="100%" alt="" />
+      <video
+        className="overlay video-player"
+        autoPlay
+        muted
+        onEnded={(e) => {
+          e.target.play();
+        }}
+        ref={(videoRef) => {
+          if (videoRef) {
+            const resizeVideo = () => {
+              const { innerWidth } = window;
+              const aspectRatio = 16 / 9; 
+              let videoWidth = innerWidth;
+
+              videoRef.style.width = `${videoWidth}px`;
+              videoRef.style.height = `${videoWidth / aspectRatio}px`;
+            };
+
+            resizeVideo();
+            window.addEventListener('resize', resizeVideo);
+
+            return () => {
+              window.removeEventListener('resize', resizeVideo);
+            };
+          }
+        }}
+      >
+        <source src="./img/Home_Screen_Video_2.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </div>
 
     <div className="overlay">
@@ -102,7 +160,36 @@ const items = [
   </div>,
   <div className="intro">
     <div className="background-svg">
-      <img className="overlay" src="./img/banner-4.jpeg" width="100%" alt="" />
+          <video
+        className="overlay video-player"
+        autoPlay
+        muted
+        onEnded={(e) => {
+          e.target.play();
+        }}
+        ref={(videoRef) => {
+          if (videoRef) {
+            const resizeVideo = () => {
+              const { innerWidth } = window;
+              const aspectRatio = 16 / 9; 
+              let videoWidth = innerWidth;
+
+              videoRef.style.width = `${videoWidth}px`;
+              videoRef.style.height = `${videoWidth / aspectRatio}px`;
+            };
+
+            resizeVideo();
+            window.addEventListener('resize', resizeVideo);
+
+            return () => {
+              window.removeEventListener('resize', resizeVideo);
+            };
+          }
+        }}
+      >
+        <source src="./img/Home_Screen_Video_3.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </div>
 
     <div className="overlay">
