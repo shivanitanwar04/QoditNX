@@ -1797,11 +1797,11 @@ label {
     /* margin-top: ; */
   }
   header .intro-text {
-    padding: 226px 0 !important;
+    padding: 160px 0 !important;
   }
 
   .intro p {
-    font-size: 15px;
+    font-size: 12px;
   }
   .typographyCSS {
     color: #141414;
@@ -2414,4 +2414,12 @@ margin-top: 50rem;#new-about
   padding: 20px 0 5px 0;
 }
 
-
+@media (max-width="375px") {
+  .intro-text p {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 30px;
+  margin-bottom: 50rem;
+}
+}
