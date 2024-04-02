@@ -220,7 +220,7 @@ export const Header = (props) => {
           mouseTracking
           items={items}
           autoPlay={true}
-          autoPlayInterval={6000}
+          autoPlayInterval={5000}
           infinite={true}
           buttonsDisabled={false}
         />
