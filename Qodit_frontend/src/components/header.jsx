@@ -1,20 +1,41 @@
-import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
-import { Container, Row, Col } from "react-bootstrap";
-
-import Carousel from "react-bootstrap/Carousel";
+import React from 'react';
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
 
 const items = [
   <div className="intro">
-    <div className="background-svg">
-      <img
-        className="overlay img-fluid"
-        src="./img/banner-1.jpeg"
-        width="100%"
-        alt=""
-      />
-    </div>
+        <div className="background-svg">
+     <video
+        className="overlay video-player"
+        autoPlay
+        muted
+        onEnded={(e) => {
+          e.target.play();
+        }}
+        ref={(videoRef) => {
+          if (videoRef) {
+            const resizeVideo = () => {
+              const { innerWidth } = window;
+              const aspectRatio = 16 / 9; 
+              let videoWidth = innerWidth;
 
+              videoRef.style.width = `${videoWidth}px`;
+              videoRef.style.height = `${videoWidth / aspectRatio}px`;
+            };
+
+            resizeVideo();
+            window.addEventListener('resize', resizeVideo);
+
+            return () => {
+              window.removeEventListener('resize', resizeVideo);
+            };
+          }
+        }}
+      >
+        <source src="./img/Home_Screen_Video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
     <div className="overlay">
       <div className="container">
         <div className="row">
@@ -23,11 +44,9 @@ const items = [
               <span>WEB DEVELOPMENT</span>
             </h1>
             <br />
-            <p>
-            An interactive web application readily amplifies user engagement. Our user-centred web app is feature-rich.
-            </p>
+            <p>An interactive web application readily amplifies user engagement. Our user-centered web app is feature-rich.</p>
             <br />
-            <a href="#features" className=" btn-custom btn-lg page-scroll">
+            <a href="#features" className="btn-custom btn-lg page-scroll">
               Learn More
             </a>
           </div>
@@ -48,12 +67,9 @@ const items = [
               <span>System Development</span>
             </h1>
             <br />
-            <p>
-              With a broad selection of web application services, we guarantee
-              to meet all of your business needs. Our web developer.
-            </p>
+            <p>With a broad selection of web application services, we guarantee to meet all of your business needs. Our web developer.</p>
             <br />
-            <a href="#features" className=" btn-custom btn-lg page-scroll">
+            <a href="#features" className="btn-custom btn-lg page-scroll">
               Learn More
             </a>
           </div>
@@ -74,11 +90,9 @@ const items = [
               <span>Product Development</span>
             </h1>
             <br />
-            <p>
-            We believe in bringing new product to the marketplace by implementing innovative businesses 
-            </p>
+            <p>We believe in bringing new product to the marketplace by implementing innovative businesses.</p>
             <br />
-            <a href="#features" className=" btn-custom btn-lg page-scroll">
+            <a href="#features" className="btn-custom btn-lg page-scroll">
               Learn More
             </a>
           </div>
@@ -99,11 +113,9 @@ const items = [
               <span>Cloud Services</span>
             </h1>
             <br />
-            <p>
-            Our cloud services provide the options of availing remote services via cloud computing servers. 
-            </p>
+            <p>Our cloud services provide the options of availing remote services via cloud computing servers.</p>
             <br />
-            <a href="#features" className=" btn-custom btn-lg page-scroll">
+            <a href="#features" className="btn-custom btn-lg page-scroll">
               Learn More
             </a>
           </div>
@@ -118,15 +130,14 @@ export const Header = (props) => {
     <header id="header">
       <div className="alicesec">
         <AliceCarousel
-         mouseTracking
-         items={items}
-         autoPlay={true}
-         autoPlayInterval={5000}
-         infinite={true}
-         buttonsDisabled={false}
+          mouseTracking
+          items={items}
+          autoPlay={true}
+          autoPlayInterval={6000}
+          infinite={true}
+          buttonsDisabled={false}
         />
       </div>
     </header>
   );
 };
- 

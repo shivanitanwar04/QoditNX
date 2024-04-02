@@ -32,7 +32,7 @@ app.post('/send-email', async (req, res) => {
             from: `${email}`,
             to: 'amityadav497421@gmail.com',
             subject: 'Contact Us Form Submission',
-            text: `\n\nDear ${name}, has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are the details of applicants:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}\n`,
+            text: `\n\nDear ${name}, has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are the details of applicants:\n\nName: ${name}\nEmail: ${email} \t (Give the reply just clicking on mail id)\nMessage: ${message}\n`,
         };
 
         try {
@@ -77,7 +77,7 @@ app.post('/send-email-with-attachments', async (req, res) => {
             from: `${email}`,
             to: 'amityadav497421@gmail.com', 
             subject: 'Career Form  Submission',
-            text: `\n\nDear ${name},has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are the details of applicants:\n\nName:${name}\nMessage:${message}\nEmail: ${email}\nMobile Number: ${phoneNumber}\nJob Role: ${jobrole}\nTechnology: ${technology}\n`,
+            text: `\n\nDear ${name},has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are the details of applicants:\n\nName:${name}\nMessage:${message}\nEmail: ${email}\t (Give the reply just clicking on mail id)\nMobile Number: ${phoneNumber}\nJob Role: ${jobrole}\nTechnology: ${technology}\n`,
             attachments: attachment ? [{ filename: attachment.originalname, content: attachment.buffer }] : []
         };
 
