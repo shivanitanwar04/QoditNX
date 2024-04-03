@@ -67,8 +67,7 @@
     "start-prod": "env-cmd -f ./.env react-scripts start",
     "test": "react-scripts test --coverage",
     "eject": "react-scripts eject",
-    "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
-    "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
+    "build": "react-scripts build",
     "start1": "react-scripts start"
   },
   "eslintConfig": {
