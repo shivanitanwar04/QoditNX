@@ -290,7 +290,7 @@ Swal.fire({
               id: "phoneNumber",
               name: "phoneNumber",
               required: true,
-              autoFocus: true,
+              autoFocus: false,
               className: "form-control"
             }}
             country={"in"} 
