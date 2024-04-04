@@ -24,7 +24,7 @@ export const NewAboutUs = () => {
         <div className="background-svg">
           <img
             className="background-header"
-            src="./img/Aboutus.png"
+            src="./img/Aboutuspic.png"
             width="100%"
             alt=""
           />

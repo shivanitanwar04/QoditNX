@@ -1,6 +1,5 @@
-import React from "react";
-import { useEffect } from "react";
-import {Helmet} from "react-helmet";
+import React, { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 export const NewFeature = (props) => {
   useEffect(() => {
@@ -37,17 +36,17 @@ export const NewFeature = (props) => {
       </div>
       {/* <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> */}
 
-            <section className="sec-about sec-service servicesection">
+            <section className="sec-about sec-service servicesection" id="#availabilitysection">
               <div className="container">
                 <div className="row">
                   <div className="col-md-6">
-                    <div className="web-content">
+                    <div className="web-content-for-features">
                       <h2>Availability all the Time</h2>
                       <p>We have been giving multidimensional IT organizations to our clients including electronic exhibiting and online webpage arranging solutions.we Offer monetarily wise and quick solutions for our clients, we work with a right attitude and thusly execute fittingly. It's not by and large you, it's us.</p>
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <div className="web-image">
+                    <div className="web-image-for-features">
                       <img
                         data-aos="fade-left"
                         data-aos-duration="1500"
@@ -59,7 +58,7 @@ export const NewFeature = (props) => {
                 </div>
               </div>
             </section>
-                    <section className="sec-service web-bg">
+                    <section className="sec-service web-bg" id="#diversesection">
               <div className="container">
                 <div className="row">
                   <div className="col-md-6">
@@ -84,7 +83,7 @@ export const NewFeature = (props) => {
               </div>
             </section>
 
-            <section className="sec-service">
+            <section className="sec-service" id="#researchsection">
               <div className="container">
                 <div className="row">
                   <div className="col-md-6">
@@ -106,7 +105,7 @@ export const NewFeature = (props) => {
                 </div>
               </div>
             </section>
-                    <section className="sec-service web-bg">
+                    <section className="sec-service web-bg" id="#experiencedsection" >
               <div className="container">
                 <div className="row">
                   <div className="col-md-6">
