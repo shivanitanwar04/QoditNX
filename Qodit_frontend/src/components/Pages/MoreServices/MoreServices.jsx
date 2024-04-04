@@ -15,7 +15,7 @@ export const MoreServices = (props) => {
       <div className="background-svg">
         <img
           className="background-header"
-          src="img/qoditservice.png"
+          src="img/servic-ces.jpg"
           width="100%"
           alt=""
         />
@@ -86,8 +86,6 @@ export const MoreServices = (props) => {
                   className="
   "
                 >
-
-                  
                   <h2>System Development</h2>
                 </div>
 
