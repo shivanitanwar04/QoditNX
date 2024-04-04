@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { ToastContainer, toast } from "react-toastify";
@@ -207,6 +207,9 @@ Swal.fire({
 });
 
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <div className="background-svg">
@@ -287,7 +290,7 @@ Swal.fire({
               id: "phoneNumber",
               name: "phoneNumber",
               required: true,
-              autoFocus: true,
+              autoFocus: false,
               className: "form-control"
             }}
             country={"in"} 
