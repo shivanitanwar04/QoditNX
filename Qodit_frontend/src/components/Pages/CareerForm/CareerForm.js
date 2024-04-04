@@ -215,7 +215,7 @@ Swal.fire({
       <div className="background-svg">
         <img
           className="background-header"
-          src="./img/Career.png"
+          src="./img/careerpic.png"
           width="100%"
           alt=""
         />

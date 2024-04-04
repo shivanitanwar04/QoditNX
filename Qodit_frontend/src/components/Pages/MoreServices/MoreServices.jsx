@@ -15,7 +15,7 @@ export const MoreServices = (props) => {
       <div className="background-svg">
         <img
           className="background-header"
-          src="img/servic-ces.jpg"
+          src="img/servicespic.png"
           width="100%"
           alt=""
         />
@@ -35,7 +35,7 @@ export const MoreServices = (props) => {
       </div>
       {/* <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> */}
 
-      <section className="sec-about sec-service mb-1 servicesection">
+      <section className="sec-about sec-service mb-1 servicesection" id="#webdevelopmentsection">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -66,7 +66,7 @@ export const MoreServices = (props) => {
         </div>
       </section>
 
-      <section className="sec-service web-bg">
+      <section className="sec-service web-bg" id="#systemdevelopmentsection">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -86,7 +86,7 @@ export const MoreServices = (props) => {
                   className="
   "
                 >
-                  <h2>System Development</h2>
+               <h2>System Development</h2>
                 </div>
 
                 <p>
@@ -103,7 +103,7 @@ export const MoreServices = (props) => {
         </div>
       </section>
 
-      <section className="sec-service">
+      <section className="sec-service" id="#productdevelopmentsection">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -134,7 +134,7 @@ export const MoreServices = (props) => {
         </div>
       </section>
 
-      <section className="sec-service web-bg">
+      <section className="sec-service web-bg" id="#mvpsection">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -164,12 +164,12 @@ export const MoreServices = (props) => {
           </div>
         </div>
       </section>
-      <section className="sec-service">
+      <section className="sec-service" id="#cloudservicesection">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
               <div className="web-content">
-                <div className="">
+                <div className="web-content-h2">
                   <h2>Cloud Services</h2>
                 </div>
                 <p>
@@ -195,7 +195,7 @@ export const MoreServices = (props) => {
         </div>
       </section>
 
-      <section className="sec-service web-bg">
+      <section className="sec-service web-bg" id="#dataengineeringsection">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -225,13 +225,13 @@ export const MoreServices = (props) => {
           </div>
         </div>
       </section>
-      <section className="sec-service mb-1">
+      <section className="sec-service mb-1" id="#webdesignersection">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
               <div className="web-content">
-                \
-                <div className="">
+                
+                <div className="web-content-services">
                   <h2>WEB DESIGNER</h2>
                 </div>
                 <p>

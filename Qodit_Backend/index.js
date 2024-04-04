@@ -23,16 +23,16 @@ app.post('/send-email', async (req, res) => {
             secure: true,
             auth: {
                 user: process.env.EMAIL_USER,
-                pass: 'gklz ugpn gfvw tpid'
+                pass: process.env.EMAIL_PASSWORD,
             },
             pool: true
         });
 
         let mailOptions = {
             from: `${email}`,
-            to: 'amityadav497421@gmail.com',
+            to: 'hr.qodit@gmail.com',
             subject: 'Contact Us Form Submission',
-            text: `\n\nDear ${name}, has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are the details of applicants:\n\nName: ${name}\nEmail: ${email} \t (Give the reply just clicking on mail id)\nMessage: ${message}\n`,
+            text: `\n\nHi Hr, \n${name}, has expressed interest in our company through the contact form on our official website.\n\n Following are the details of applicants:\n\nName: ${name}\nEmail: ${email} \t (Give the reply just clicking on mail id)\nMessage: ${message}\n`,
         };
 
         try {
@@ -40,7 +40,7 @@ app.post('/send-email', async (req, res) => {
             console.log('Email sent:', info.response);
              res.send('Email sent successfully!');
             let feedbackOptions = {
-                from: 'Qodit <amityadav497421@gmail.com>',
+                from: 'Qodit <hr.qodit@gmail.com>',
                 to: email,
                 subject: 'Thank You for Applying',
                 text: `\n\nDear ${name},\n\nThank you for applying. We have received your message and will get back to you soon.\n\nHere are your application details:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}\n`,
@@ -68,16 +68,16 @@ app.post('/send-email-with-attachments', async (req, res) => {
             secure: true, 
             auth: {
                 user: process.env.EMAIL_USER,
-                pass: 'gklz ugpn gfvw tpid'
+                pass: process.env.EMAIL_PASSWORD,
             },
             pool : true
         });
 
         let mailOptions = {
             from: `${email}`,
-            to: 'amityadav497421@gmail.com', 
+            to: 'hr.qodit@gmail.com', 
             subject: 'Career Form  Submission',
-            text: `\n\nDear ${name},has shown interest in joining our team by filling the contact us form on our official company website.\n\n Following are the details of applicants:\n\nName:${name}\nMessage:${message}\nEmail: ${email}\t (Give the reply just clicking on mail id)\nMobile Number: ${phoneNumber}\nJob Role: ${jobrole}\nTechnology: ${technology}\n`,
+            text: `\n\nHi Hr, \n${name}, has expressed interest in our company through the contact form on our official website.\n\n Following are the details of applicants:\n\nName:${name}\nMessage:${message}\nEmail: ${email}\t (Give the reply just clicking on mail id)\nMobile Number: ${phoneNumber}\nJob Role: ${jobrole}\nTechnology: ${technology}\n`,
             attachments: attachment ? [{ filename: attachment.originalname, content: attachment.buffer }] : []
         };
 
@@ -86,7 +86,7 @@ app.post('/send-email-with-attachments', async (req, res) => {
             console.log('Email sent:', info.response);
              res.send('Email sent successfully!');
             let feedbackOptions = {
-                from: 'Qodit <amityadav497421@gmail.com>',
+                from: 'Qodit <hr.qodit@gmail.com>',
                 to: email,
                 subject: 'Thank You for Applying',
                 text: `\n\nDear ${name},\n\nThank you for applying. We have received your message and will get back to you soon.\n\nHere are your application details:\n\nName: ${name}\nMessage: ${message}\nEmail: ${email}\nMobile Number: ${phoneNumber}\nJob Role: ${jobrole}\nTechnology: ${technology}\n`,
