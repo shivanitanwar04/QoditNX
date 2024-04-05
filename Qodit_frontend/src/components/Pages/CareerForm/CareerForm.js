@@ -20,56 +20,71 @@ export const CareerForm = (props) => {
     fileSize: 0, 
   });
 
- const handleCountryChange = (country) => {
-    setFormData({ ...formData, phoneNumber: "" }); 
-  };
-   const handleChange = (e) => {
-     const { name, value, files } = e.target;
-     if (name === "name" && !/^[a-zA-Z\s]*$/.test(value)) {
-      toast.error("Name should only contain letters and spaces");
+  const [toastId, setToastId] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "name" && !/^[a-zA-Z\s]*$/.test(value)) {
+      updateToast("Name should only contain letters and spaces", "error");
       return;
-    }
-    if (name === "file") {
+    } else if ((name === "email" || name === "message") && !value.trim()) {
+      const fieldName = name === "email" ? "Email" : "Message";
+      updateToast(`Please fill the ${fieldName} field.`, "error");
+      return;
+    } else if (name === "file") {
       const selectedFile = files[0];
       if (selectedFile) {
-        const fileSizeInMB = selectedFile.size / (1024 * 1024); 
+        const fileSizeInMB = selectedFile.size / (1024 * 1024);
         if (fileSizeInMB > 25) {
           alert("File size should not exceed 25MB.");
-          e.target.value = null; 
-          setFormData({ ...formData, file: null, fileSize: 0 }); 
+          e.target.value = null;
+          setFormData({ ...formData, file: null, fileSize: 0 });
           return;
         }
-        setFormData({ ...formData, file: selectedFile, fileSize: fileSizeInMB.toFixed(2) }); 
+        setFormData({ ...formData, file: selectedFile, fileSize: fileSizeInMB.toFixed(2) });
       } else {
-        setFormData({ ...formData, file: null, fileSize: 0 }); 
+        setFormData({ ...formData, file: null, fileSize: 0 });
       }
-    }
-    else {
+    } else {
       setFormData({ ...formData, [name]: value });
     }
   };
 
-   const validateEmail = (email) => {
+  const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-   const handleSubmit = async (e) => {
-      e.preventDefault();
-  const { name, email, message, phoneNumber, jobrole, technology, file } = formData;
 
-  if (!name && !email && !message && !phoneNumber && !jobrole && !technology && !file) {
-    toast.error("Please fill the all required fields.");
-    return;
-  }
- if (!name) {
+  const updateToast = (message, type) => {
+    if (toastId) {
+      toast.update(toastId, {
+        render: message,
+        type: type,
+        autoClose: true,
+      });
+    } else {
+      const newToastId = toast[type](message, { autoClose: true });
+      setToastId(newToastId);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { name, email, message, phoneNumber, jobrole, technology, file } = formData;
+
+    if (!name || !email || !message || !phoneNumber || !jobrole || !technology || !file) {
+      updateToast("Please fill in all the required fields.", "error");
+      return;
+    }
+if (!name) {
     toast.error("Please fill the Name field.");
     return;
      }
-      if (!validateEmail(email)) {
-      toast.error("Please enter a valid email address.");
+    if (!validateEmail(email)) {
+      updateToast("Please enter a valid email address.", "error");
       return;
     }
-  if (!email) {
+    if (!email) {
     toast.error("Please fill the Email field.");
     return;
   }
@@ -102,111 +117,85 @@ export const CareerForm = (props) => {
     formDataToSend.append("phoneNumber", phoneNumber);
     formDataToSend.append("jobrole", jobrole);
     formDataToSend.append("technology", technology);
-     formDataToSend.append("attachment", file);
-     
- const loadingToast = toast.info("Sending Response ...");
+    formDataToSend.append("attachment", file);
+
+    const loadingToast = toast.info("Sending Response ...");
     try {
       const response = await axios.post("http://localhost:5000/send-email-with-attachments", formDataToSend);
       console.log(response.data);
-       toast.update(loadingToast, {
-      render: "Your Response Saved Successfully",
-      type: toast.TYPE.SUCCESS,
-      autoClose: 5000, 
-       });
-       setFormData({
-     name: "",
-    message: "",
-    email: "",
-    phoneNumber: "",
-    jobrole: "",
-    technology: "",
-    file: null,
-    fileSize: 0,
-    });
+      toast.update(loadingToast, {
+        render: "Your Response Saved Successfully",
+        type: toast.TYPE.SUCCESS,
+        autoClose: 5000,
+      });
+      setFormData({
+        name: "",
+        message: "",
+        email: "",
+        phoneNumber: "",
+        jobrole: "",
+        technology: "",
+        file: null,
+        fileSize: 0,
+      });
     } catch (error) {
       console.error("Error:", error);
       toast.error("Error sending message. Please try again later.");
     }
   };
 
- const handleJobRoleSelect = (e) => {
+  const handleJobRoleSelect = (e) => {
     setFormData({ ...formData, jobrole: e.target.value });
   };
 
-  const handleConfirmation = (e) => {
-     e.preventDefault();
-  const { name, email, message, phoneNumber, jobrole, technology, file } = formData;
-
-  if (!name && !email && !message && !phoneNumber && !jobrole && !technology && !file) {
-    toast.error("Please fill in all the required fields.");
-    return;
-  }
-
-  if (!name) {
-    toast.error("Please fill the Name field.");
-    return;
-  }
- if (!message) {
-    toast.error("Please fill the Message field.");
-    return;
-    }
-     if (!validateEmail(email)) {
-      toast.error("Please enter a valid email address.");
-      return;
-    }
-    if (!email) {
-      toast.error("Please fill the Email field.");
-      return;
-    }
-  if (!phoneNumber) {
-    toast.error("Please fill the Mobile Number.");
-    return;
-  }
-  if (!jobrole) {
-    toast.error("Please select a Job Role.");
-    return;
-  }
-  if (!technology) {
-    toast.error("Please fill the Technology field.");
-    return;
-  }
-  if (!file) {
-    toast.error("Please upload your Resume.");
-    return;
-  }
-
-   const blurContainer = document.createElement("div");
-blurContainer.style.position = "fixed";
-blurContainer.style.top = "0";
-blurContainer.style.left = "0";
-blurContainer.style.width = "100%";
-blurContainer.style.height = "100%";
-blurContainer.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-blurContainer.style.filter = "blur(26px)";
-blurContainer.style.zIndex = "1000";
-document.body.appendChild(blurContainer);
-
-Swal.fire({
-  title: "Are you want to Submit the Career Form ?",
-  text: "You won't be able to revert this!",
-  icon: "question",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "Yes, Submit it!",
-  willOpen: () => {
-    const popup = Swal.getPopup();
-    popup.style.width = '400px'; 
-    popup.style.height = '300px';
-  }
-}).then((result) => {
-  document.body.removeChild(blurContainer);
-  if (result.isConfirmed) {
-    handleSubmit(e);
-  }
-});
-
+  const handleCountryChange = (country) => {
+    setFormData({ ...formData, phoneNumber: "" });
   };
+
+  const handleConfirmation = (e) => {
+    e.preventDefault();
+    const { name, email, message, phoneNumber, jobrole, technology, file } = formData;
+
+    if (!name || !email || !message || !phoneNumber || !jobrole || !technology || !file) {
+      updateToast("Please fill in all the required fields.", "error");
+      return;
+    }
+
+    const messageContent = `Dear ${name},\n\nThank you for expressing interest in our company.\n\nHere are the details you provided:\n\nName: ${name}\nMessage: ${message}\nEmail: ${email}\nPhone Number: ${phoneNumber}\nJob Role: ${jobrole}\nTechnology: ${technology}`;
+
+    const blurContainer = document.createElement("div");
+    blurContainer.style.position = "fixed";
+    blurContainer.style.top = "0";
+    blurContainer.style.left = "0";
+    blurContainer.style.width = "100%";
+    blurContainer.style.height = "100%";
+    blurContainer.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    blurContainer.style.filter = "blur(26px)";
+    blurContainer.style.zIndex = "1000";
+    document.body.appendChild(blurContainer);
+
+    Swal.fire({
+      title: "Are you sure you want to Submit the Career Form?",
+      text: "You won't be able to revert this!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Submit it!",
+      willOpen: () => {
+        const popup = Swal.getPopup();
+        popup.style.width = '400px';
+        popup.style.height = '300px';
+      }
+    }).then((result) => {
+      document.body.removeChild(blurContainer);
+      if (result.isConfirmed) {
+        handleSubmit(e);
+        axios.post("http://localhost:5000/send-email", { email: formData.email, message: messageContent });
+      }
+    });
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

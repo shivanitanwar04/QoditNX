@@ -1,3 +1,4 @@
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
@@ -12,14 +13,23 @@ export const ContactUs = () => {
     message: "",
   });
 
+  const [toastId, setToastId] = useState(null); 
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "name" && !/^[a-zA-Z\s]*$/.test(value)) {
-      toast.error("Name should only contain letters and spaces");
-      return;
-    }
-    setFormData({ ...formData, [name]: value });
-  };
+  const { name, value } = e.target;
+  if (name === "name" && !/^[a-zA-Z\s]*$/.test(value)) {
+    updateToast("Name should only contain letters and spaces", "error");
+    return;
+  } else if (name === "email" && !validateEmail(value)) {
+    updateToast("Please enter a valid email address.", "error");
+    return;
+  } else if (name === "message" && !value.trim()) {
+    updateToast("Please Fill the Message.", "error");
+    return;
+  }
+  setFormData({ ...formData, [name]: value });
+};
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -30,75 +40,84 @@ export const ContactUs = () => {
     return emailRegex.test(email);
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const updateToast = (message, type) => {
+    if (toastId) {
+      toast.update(toastId, {
+        render: message,
+        type: type,
+        autoClose: true,
+      });
+    } else {
+      const newToastId = toast[type](message, { autoClose: true });
+      setToastId(newToastId);
+    }
+  };
 
-  const { name, email, message } = formData;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  if (!name.trim()) {
-    toast.error("Please Fill the Name.");
-    return;
-  }
+    const { name, email, message } = formData;
 
-  if (!email.trim()) {
-    toast.error("Please Fill the Email.");
-    return;
-  }
+    if (!name.trim()) {
+      updateToast("Please Fill the Name.", "error");
+      return;
+    }
 
-  if (!validateEmail(email)) {
-    toast.error("Please enter a valid email address.");
-    return;
-  }
+    if (!email.trim()) {
+      updateToast("Please Fill the Email.", "error");
+      return;
+    }
 
-  if (!message.trim()) {
-    toast.error("Please Fill the Message.");
-    return;
-  }
+    if (!validateEmail(email)) {
+      updateToast("Please enter a valid email address.", "error");
+      return;
+    }
 
-  const loadingToast = toast.info("Sending Response ...");
+    if (!message.trim()) {
+      updateToast("Please Fill the Message.", "error");
+      return;
+    }
 
-  try {
-    const response = await axios.post(
-      "http://localhost:5000/send-email",
-      formData
-    );
-    console.log(response.data);
-    toast.update(loadingToast, {
-      render: "Your Response Saved Successfully",
-      type: toast.TYPE.SUCCESS,
-      autoClose: 3000, 
-    });
-    setFormData({
-      name: "",
-      email: "",
-      message: "",
-    });
-  } catch (error) {
-    console.error("Error:", error);
-    toast.error("Error sending message. Please try again later.");
-  }
-};
+    updateToast("Sending Response ...", "info");
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/send-email",
+        formData
+      );
+      console.log(response.data);
+      updateToast("Your Response Saved Successfully", "success");
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      updateToast("Error sending message. Please try again later.", "error");
+    }
+  };
 
   const handleConfirmation = (e) => {
     e.preventDefault();
 
     const { name, email, message } = formData;
-if (!name.trim()) {
-      toast.error("Please Fill the Name.");
+    if (!name.trim()) {
+      updateToast("Please Fill the Name.", "error");
       return;
     }
 
     if (!email.trim()) {
-      toast.error("Please Fill the Email.");
+      updateToast("Please Fill the Email.", "error");
       return;
     }
     if (!validateEmail(email)) {
-      toast.error("Please enter a valid email address.");
+      updateToast("Please enter a valid email address.", "error");
       return;
     }
 
     if (!message.trim()) {
-      toast.error("Please Fill the Message.");
+      updateToast("Please Fill the Message.", "error");
       return;
     }
 
@@ -122,10 +141,10 @@ if (!name.trim()) {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, Submit it!",
       willOpen: () => {
-    const popup = Swal.getPopup();
-    popup.style.width = '400px'; 
-    popup.style.height = '300px';
-  }
+        const popup = Swal.getPopup();
+        popup.style.width = '400px'; 
+        popup.style.height = '300px';
+      }
     }).then((result) => {
       document.body.removeChild(blurContainer);
 
@@ -134,6 +153,7 @@ if (!name.trim()) {
       }
     });
   };
+
   return (
     <div>
       <Helmet>
